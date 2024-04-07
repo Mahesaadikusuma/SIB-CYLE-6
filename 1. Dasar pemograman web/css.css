@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Quicksand", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+}
+/* @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap') */
+body {
+  /* font-variant: initial; */
+  /* font-family: "Quicksand", sans-serif; */
+  /* font-weight: 700; */
+}
+
+/* shortHand */
+/* p {
+  font: 1em sans-serif;
+} */
+
+/* rule akan diterapkan pada sebuah tautan yang belum pernah dikunjungi */
+a:link {
+  color: red;
+}
+
+/* rule akan diterapkan pada sebuah tautan yang sudah pernah dikunjungi */
+a:visited {
+  color: green;
+}
+
+/* rule akan diterapkan pada sebuah tautan ketika diarahkan dengan kursor */
+a:hover {
+  color: pink;
+}
+
+/* rule akan diterapkan pada sebuah tautan ketika ditekan */
+a:active {
+  color: orange;
+}
+
+blockquote::before,
+blockquote::after {
+  content: "''";
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* Rule styling akan diterapkan pada karakter pertama di sebuah paragraf */
+p::first-letter {
+  font-size: 32px;
+  font-weight: bold;
+  color: saddlebrown;
+}

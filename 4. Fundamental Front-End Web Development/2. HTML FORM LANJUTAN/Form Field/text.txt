@@ -1,0 +1,10 @@
+<input
+type="text"
+inputmode="numeric"
+id="card-number"
+name="card-number"
+autocomplete="cc-number"
+required
+pattern="[0-9]+" />
+
+Oleh karena itu, kita menggunakan inputmode=numeric agar kibor dioptimalkan untuk menampilkan tombol-tombol angka saja.

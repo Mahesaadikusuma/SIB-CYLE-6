@@ -1,0 +1,19 @@
+:host {
+  padding: 1rem 0.8rem;
+  display: block;
+
+  border-radius: 4px;
+  box-shadow: 0 0 2px 2px #33333377;
+}
+
+.blog__title {
+  margin-block-start: 0;
+  margin-block-end: 1rem;
+
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+p {
+  margin-block-start: 0;
+}

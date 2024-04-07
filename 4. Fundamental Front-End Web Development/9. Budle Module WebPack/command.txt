@@ -1,0 +1,7 @@
+npm install @babel/core babel-loader @babel/preset-env --save-dev
+
+npm install html-webpack-plugin --save-dev
+npm install webpack-dev-server --save-dev // seperti live server
+
+"build": "webpack",
+    "start-dev": "webpack serve",

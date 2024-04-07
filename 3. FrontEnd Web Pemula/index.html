@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>asd</p>
+
+    <p>asd</p>
+    <button>asdsa</button>
+    <script>
+      const newObject = {
+        satu: "satu",
+        dua: "dua",
+        tiga: true,
+      };
+      //   yang ini hasilnya undifine
+      localStorage.setItem("newItem", JSON.stringify(newObject));
+      const getObjectS = localStorage.getItem("newItem");
+      //   console.log(`${getObject.satu} ${getObject.dua} ${getObject.tiga}`);
+
+      //   Untuk mengakses nilai properti dari objek yang sudah di-deserialize dari JSON, Anda perlu menggunakan JSON.parse() untuk mengonversi string kembali menjadi objek. Berikut ini cara memperbaikinya:
+      const getObject = JSON.parse(getObjectS);
+      console.log(`${getObject.satu} ${getObject.dua} ${getObject.tiga}`);
+
+      //   const button = document.querySelector("button");
+      //   button.addEventListener("click", () => console.log("Dicoding Indonesia"));
+
+      const button = document.querySelectorAll("button");
+      button.addEventListener("click", () => console.log("Dicoding Indonesia"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const book = {
+        id: 10,
+        title: "Edensor",
+        author: "Andrea Hirata",
+      };
+
+      fetch("https://books-api.dicoding.dev/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": "12345",
+        },
+        body: JSON.stringify(book),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function () {
+          console.log("Ups, something error");
+        });
+    </script>
+  </body>
+</html>

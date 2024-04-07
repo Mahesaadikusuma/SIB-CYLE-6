@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Shadow DOM untuk Web Component</title>
+
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <style>
+      form * {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shadow DOM untuk Web Component</h1>
+
+    <form>
+      <div>
+        <label for="cvc">
+          Kode validasi kartu
+          <popup-info
+            id="popup"
+            img="https://raw.githubusercontent.com/dicodingacademy/a163-bfwd-labs/099-shared-files/info.png"
+            description="Card Validation Code (CVC) Anda adalah fitur keamanan tambahan – ada di 3 atau 4 nomor terakhir pada sisi belakang kartu Anda."></popup-info> </label
+        ><br />
+        <input name="cvc" id="cvc" />
+      </div>
+    </form>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kejutan Tak Terduga</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 3rem;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+
+      .contents {
+        position: relative;
+        border: 2px solid black;
+        text-align: center;
+        background-color: rgb(227, 226, 226);
+      }
+
+      img {
+        border-radius: 20%;
+      }
+
+      button {
+        margin-bottom: 15px;
+        background-color: rgb(57, 201, 0);
+        padding: 1rem;
+        border-radius: 10px;
+        font-weight: bold;
+      }
+
+      @media screen and (max-width: 428px) {
+        * {
+          margin: 1.2rem;
+        }
+
+        h3 {
+          font-size: 1rem;
+        }
+
+        h2 {
+          font-size: 1rem;
+        }
+
+        img {
+          position: relative;
+          right: 0.2rem;
+          width: 12rem;
+          height: 12rem;
+          border-radius: 20%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="contents" hidden>
+      <button id="incrementButton">Tekan Aku 😊</button>
+      <h3>
+        Kamu sudah menekan tombol di atas sebanyak <span id="count">0</span>
+      </h3>
+    </div>
+    <script>
+      function welcome() {
+        alert("Selamat Datang!");
+        let user = prompt("Masukan Nama Anda");
+        alert("Terimakasih " + user);
+        const contents = document.querySelector(".contents");
+        contents.removeAttribute("hidden");
+      }
+      document.body.onload = welcome;
+
+      function increment() {
+        document.getElementById("count").innerText++;
+
+        if (document.getElementById("count").innerText == 10) {
+          const hiddenMessage = document.createElement("h2");
+          hiddenMessage.innerHTML =
+            "Selamat Anda Menemukan Orang Ganteng....... 😎 Semoga Harimu Menyenangkan";
+          const image1 = document.createElement("img");
+          image1.setAttribute("src", "orangGanteng.jpg");
+          image1.setAttribute("height", "350");
+          const contents = document.querySelector(".contents");
+          contents.appendChild(hiddenMessage).appendChild(image1);
+        }
+        if (document.getElementById("count").innerText == 20) {
+          const hiddenMessage1 = document.createElement("h2");
+          hiddenMessage1.innerHTML =
+            "Eh Nemu Lagi wkwkwkw, Jangan Diterusin Udah Gk Ada Lagi";
+          const image2 = document.createElement("img");
+          image2.setAttribute("src", "orangGanteng1.jpg");
+          image2.setAttribute("height", "350");
+          const contents = document.querySelector(".contents");
+          contents.appendChild(hiddenMessage1).appendChild(image2);
+        }
+        if (document.getElementById("count").innerText == 26) {
+          const hiddenMessage2 = document.createElement("h1");
+          hiddenMessage2.innerHTML = "Sudah dibilangin gk ada lagii, STOP 🤚🏻";
+          const contents = document.querySelector(".contents");
+          contents.appendChild(hiddenMessage2);
+        }
+      }
+      document.getElementById("incrementButton").onclick = increment;
+    </script>
+  </body>
+</html>

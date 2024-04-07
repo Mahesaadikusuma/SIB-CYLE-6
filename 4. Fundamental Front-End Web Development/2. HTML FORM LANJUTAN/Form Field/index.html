@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Form Lanjutan</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <form>
+        <div class="form-group">
+          <label for="name">Nama</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="cc-name"
+            required />
+        </div>
+        <div class="form-group">
+          <label>Card number</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            id="card-number"
+            name="card-number"
+            autocomplete="cc-number"
+            required
+            pattern="[0-9]+" />
+        </div>
+        <div class="form-group date-code">
+          <div>
+            <label for="expiry-date">Expiry date</label>
+            <input
+              type="text"
+              id="expiry-date"
+              class="expiry-date"
+              name="expiry-date"
+              autocomplete="cc-exp"
+              required
+              placeholder="MM/YY"
+              minlength="4"
+              pattern="[0-9/]+" />
+          </div>
+          <div>
+            <label for="security-code">Security code</label>
+            <input
+              type="text"
+              inputmode="numeric"
+              id="security-code"
+              name="security-code"
+              required
+              minlength="3"
+              maxlength="4"
+              pattern="[0-9]+" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fruitType">
+            Pilih buah favorit Anda
+            <span aria-label="required">*</span>
+          </label>
+          <input type="text" id="fruitType" name="fruitType" required />
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Jumlah buah</label>
+          <input type="number" id="amount" name="amount" value="1" min="1"
+          max="10" step="2" // kelipatan 2 jika input type number di tambah maka
+          akan menambahkan 2 + 1 required autocomplete="off" />
+        </div>
+
+        <!-- REGEX FORM -->
+        <!-- Contohnya, kita memiliki form control yang meminta user memasukkan username-nya. Umumnya, username memiliki aturan penulisan.
+
+        Tidak diawali dengan angka.
+        Tidak mengandung white space atau spasi.
+        Tidak mengandung karakter spesial, seperti dolar ($). -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            pattern="^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"
+            autocomplete="off" />
+        </div>
+
+        <!-- custom validation -->
+        <div class="form-group">
+          <label for="username">Username login</label>
+          <input
+            type="text"
+            id="usernameInput"
+            name="username"
+            required
+            autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <button class="btn">Bayar Sekarang</button>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      const form = document.querySelector("form");
+      const usernameInput = document.getElementById("usernameInput");
+      console.log(usernameInput);
+
+      form.addEventListener("submit", (event) => event.preventDefault());
+
+      usernameInput.addEventListener("invalid", (event) => {
+        event.target.setCustomValidity("");
+
+        if (!event.target.validity.valid) {
+          event.target.setCustomValidity("Wajib diisi.");
+          return;
+        }
+
+        if (event.target.validity.tooShort) {
+          event.target.setCustomValidity(
+            "Minimal panjang adalah enam karakter."
+          );
+          return;
+        }
+
+        if (event.target.validity.patternMismatch) {
+          event.target.setCustomValidity(
+            "Tidak boleh diawali dengan simbol, mengandung white space atau spasi, dan mengandung karakter spesial seperti dolar ($)."
+          );
+          return;
+        }
+      });
+      usernameInput.addEventListener("change", customValidationUsernameHandler);
+      usernameInput.addEventListener(
+        "invalid",
+        customValidationUsernameHandler
+      );
+    </script>
+  </body>
+</html>

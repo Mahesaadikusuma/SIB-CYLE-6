@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.action-reading {
+  @apply cursor-pointer flex gap-8 flex-col;
+}
+
+.list-item {
+  @apply flex justify-between gap-10 bg-white p-5 my-3;
+}
+/* 
+.book-list {
+  @apply;
+} */

@@ -1,0 +1,20 @@
+{
+  "name": "bookshelf-apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./src/main.css -o ./build/style/dev.css --watch",
+    "build": "npx tailwindcss -i ./src/main.css -o ./build/style/build.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "flowbite": "^2.3.0"
+  }
+}

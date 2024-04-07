@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing Fetch</title>
+  </head>
+  <body>
+    <!-- fetch("https://books-api.dicoding.dev/list")
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseJson) => {
+          document.body.innerText = JSON.stringify(responseJson);
+        })
+        .catch((error) => {
+          console.log(error);
+        }); -->
+    <script>
+      async function getBooks() {
+        try {
+          const response = await fetch("https://books-api.dicoding.dev/list");
+          const responseJson = await response.json();
+          console.log(responseJson);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      getBooks();
+    </script>
+  </body>
+</html>

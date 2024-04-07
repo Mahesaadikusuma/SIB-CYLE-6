@@ -1,0 +1,35 @@
+.wrapper {
+  display: grid;
+
+  gap: 16px;
+}
+
+/* Styling pendukung */
+.wrapper > div {
+  border: 1px dashed black;
+  padding: 16px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 5em 100px 30%;
+
+  grid-template-rows: 150px 200px auto;
+  /*  grid-template-columns:
+    [kiri] 5em
+    [tengah1] 100px
+    [tengah2] 30%
+    [kanan]; */
+  gap: 10px;
+}
+
+/* tidak terjadi apa apa */
+/* .container.writing-mode {
+  writing-mode: horizontal-tb;
+
+  Silakan ubah nilai menjadi `ltr`
+  direction: ltr;
+}
+[class^="box"] {
+  height: 150px;
+} */

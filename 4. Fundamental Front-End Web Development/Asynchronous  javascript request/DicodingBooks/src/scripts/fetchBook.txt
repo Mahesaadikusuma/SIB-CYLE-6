@@ -1,0 +1,116 @@
+GET DATA DENGAN FETCH BOOK 
+const getBook = () => {
+  fetch(`${baseUrl}/list`)
+      .then(response => {
+        return response.json();
+      })
+      .then(responseJson => {
+        if (responseJson.error) {
+          showResponseMessage(responseJson.message);
+        } else {
+          renderAllBooks(responseJson.books);
+        }
+      })
+      .catch(error => {
+        showResponseMessage(error);
+      });
+};
+
+Menggunakan async await
+ const getBook = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/list`);
+      const responseJson = await response.json();
+
+      if (responseJson.error) {
+        showResponseMessage(responseJson.message);
+      } else {
+        renderAllBooks(responseJson.books);
+      }
+    } catch (error) {
+      showResponseMessage(error);
+    }
+ }
+
+
+ INSERT DATA BOOK 
+ const insertBook = (book) => {
+  fetch(`${baseUrl}/add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': '12345'
+    },
+    body: JSON.stringify(book)
+  }).then(response => {
+    return response.json();
+  }).then(responseJson => {
+    showResponseMessage(responseJson.message);
+    getBook();
+  }).catch(error => {
+    showResponseMessage(error);
+  });
+};
+
+
+ MENGGUNKAN async await
+ const insertBook = async (book) => {
+    // tuliskan kode di sini!
+
+    try {
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": "12345",
+        },
+        body: JSON.stringify(book),
+      };
+
+      const response = await fetch(`${baseUrl}/add`, options);
+      const responseJson = await response.json();
+      showResponseMessage(responseJson.message);
+      getBook();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  UPDATE BOOK
+fetch(`${baseUrl}/edit/${book.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "12345",
+      },
+      body: JSON.stringify(book),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        showResponseMessage(responseJson.message);
+        getBook();
+      })
+      .catch((error) => {
+        showResponseMessage(error);
+      });
+
+  REMOVE BOOK
+  fetch(`${baseUrl}/delete/${bookId}`, {
+      method: "DELETE",
+      headers: {
+        "X-Auth-Token": "12345",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) => {
+        showResponseMessage(responseJson.message);
+        getBook();
+      })
+      .catch((error) => {
+        showResponseMessage(error);
+      });

@@ -1,0 +1,12 @@
+:host {
+  color: salmon;
+  font-size: 20px;
+}
+
+:host-context(main) {
+  background-color: lightblue;
+}
+
+:host(.text-beige) {
+  color: beige;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <title>Conditional Form JavaScript</title>
+
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <main>
+      <div class="wrapper">
+        <form>
+          <div class="form-group">
+            <label for="name">Nama</label>
+            <input type="text" name="name" id="name" required />
+          </div>
+          <div class="form-group">
+            <input
+              type="checkbox"
+              name="isMarried"
+              id="isMarried"
+              data-controls="additionalForm" />
+            <label for="isMarried">Sudah berkeluarga?</label>
+          </div>
+
+          <fieldset class="additional-form-group" id="additionalForm">
+            <legend>Data Keluarga</legend>
+            <div class="form-group">
+              <label for="wifeName">Siapa nama istri Anda?</label>
+              <input type="text" id="wifeName" name="wifeName" />
+            </div>
+            <div class="form-group">
+              <label for="childCount">Berapa orang anak?</label>
+              <input type="number" id="childCount" name="childCount" />
+            </div>
+          </fieldset>
+
+          <div class="form-group">
+            <button class="btn">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const form = document.querySelector("form");
+      const additionalForm = form.elements.additionalForm;
+      const isMarried = form.elements.isMarried;
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const nameInput = event.target.elements.name;
+        const wifeNameInput = event.target.elements.wifeName;
+        const childCountInput = event.target.elements.childCount;
+
+        let additionalInformation;
+
+        if (isMarried.checked) {
+          additionalInformation = `Saya memiliki istri bernama ${wifeNameInput.value} dan anak berjumlah ${childCountInput.value}`;
+        } else {
+          additionalInformation = "Saya belum berkeluarga";
+        }
+
+        console.log(`Nama saya ${nameInput.value}. ${additionalInformation}`);
+      });
+
+      if (additionalForm) {
+        additionalForm.hidden = true;
+      }
+
+      if (isMarried) {
+        isMarried.setAttribute("aria-expanded", false);
+        isMarried.setAttribute("aria-controls", isMarried.dataset.controls);
+
+        isMarried.addEventListener("click", (event) => {
+          let isChecked = event.target.checked;
+
+          if (isChecked) {
+            event.target.setAttribute("aria-expanded", true);
+            additionalForm.hidden = false;
+          } else {
+            event.target.setAttribute("aria-expanded", false);
+            additionalForm.hidden = true;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

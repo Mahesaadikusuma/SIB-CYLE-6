@@ -1,0 +1,265 @@
+Ada lima konsep penting dalam webpack yang perlu kita ketahui sebelum menggunakan webpack. Dari konsep-konsep tersebut, kita tahu perilaku dari webpack ketika ia dijalankan. Berikut adalah penjelasan singkat dari kelima konsep tersebut.
+
+1,Entry
+Titik awal webpack akan menganalisis berkas dan membentuk dependency graph.
+
+2.Output
+Menentukan berkas bundel yang akan dihasilkan dari berkas-berkas yang dianalisis oleh webpack berdasarkan entry-point.
+
+3.Loaders
+Transformation tools yang akan memproses setiap berkas selain JavaScript atau JSON yang diimpor menjadi format untuk digunakan dalam tahap produksi.
+
+4.Plugin
+Melakukan tugas seperti optimasi bundel, management aset, dan sebagainya.
+
+5.Mode
+Acuan optimasi yang harus diterapkan dalam melakukan build. Ini dapat ditetapkan dengan nilai ”production”, “development”, ataupun “none”.
+
+
+
+pengertian lebih lanjut
+1. entry point
+Entry atau entry-point adalah modul pertama yang akan dianalisis oleh webpack ketika ia dijalankan. Melalui entry point inilah webpack akan membentuk dependency graph. webpack akan mencari tahu modul lain yang digunakan pada entry-point dan menggabungkannya menjadi satu static assets.
+
+Dalam webpack, standarnya nilai entry-point akan ditempatkan pada src/index.js. Namun, kita dapat menetapkan lokasi yang berbeda dengan mengatur properti entry pada berkas webpack configuration (webpack.config.js). Berikut contohnya.
+
+module.exports = {
+  entry: './path/to/my/entry/file.js',
+};
+
+module.exports = {
+  entry: {
+    main: './path/to/my/entry/file.js',
+  },
+};  
+
+Kita bisa memanfaatkan object literal sebagai nilai entry ketika ada banyak entry point yang ingin ditetapkan.
+
+module.exports = {
+  entry: {
+    app: './src/app.js',
+    adminApp: './src/adminApp.js',
+  },
+};
+
+2. Output
+Output merupakan salah satu properti yang terdapat pada webpack configuration. Properti ini berfungsi untuk memberitahu webpack di mana dan bagaimana lokasi static assets yang telah dibundel harus disimpan dan diberi nama. Standarnya lokasi penyimpanannya berada pada dist -> main.js. Lokasi dist merupakan lokasi standar untuk menyimpan berkas yang dihasilkan oleh webpack.
+
+Kita dapat mengkonfigurasi bagian output ini melalui properti output pada webpack.config.js seperti contoh berikut ini:
+
+const path = require('path');
+ 
+module.exports = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
+  }
+};
+
+Pada contoh di atas, kita menggunakan output.filename dan output.path properties untuk memberitahu webpack mengenai penamaan dan lokasi static assets yang sudah dibundel. Pada contoh di atas, kita juga dapat melihat modul path yang diimpor menggunakan Node.js module.
+
+jika kita menetapkan lebih dari satu entry point, kita perlu menggunakan substitution untuk memastikan berkas yang dihasilkan webpack memiliki nama unik.
+
+module.exports = {
+  entry: {
+    app: './src/app.js',
+    search: './src/search.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/dist'
+  }
+};
+ 
+// webpack akan menghasilkan: ./dist/app.js, ./dist/search.js
+
+
+3. Loader
+Dalam melaksanakan tugas, sejatinya webpack hanya mengenali berkas JavaScript dan JSON. Namun, melalui loader, webpack dapat memproses berkas berformat lain, seperti css, sass, pug, jsx atau yang lainnya. Loader adalah sebuah transformation tools pada webpack untuk memproses setiap berkas selain JavaScript atau JSON yang kita impor menjadi format yang dapat digunakan pada tahap produksi.
+
+Untuk menetapkan loader, kita gunakan properti module.rules pada webpack configuration (webpack.config.js). Di dalamnya terdapat dua high level properties, yaitu test dan use. Berikut penjelasan singkatnya.
+
+Properti test adalah tipe berkas yang akan ditransformasikan.
+Properti use adalah loader yang akan digunakan untuk mentransformasikan berkas tersebut.
+Belum terbayang bagaimana penggunaannya? Berikut adalah contoh konfigurasi dari properti loader.
+
+module.exports = {
+  module: {
+    rules: [
+      { test: /\.css$/, use: 'css-loader' },
+    ],
+  },
+};
+
+npm install css-loader --save-dev
+npm install style-loader css-loader --save-dev
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
+      },
+    ],
+  },
+};
+
+Saat menuliskan banyak loader dalam satu rule, urutan deklarasi loader tersebut sangat berpengaruh. Loader akan tereksekusi dengan urutan dari bawah ke atas. Pada contoh di atas, eksekusi akan dimulai dari css-loader, lalu dilanjutkan oleh style-loader.
+
+Dengan menuliskan loader secara eksplisit seperti di atas, kita juga mudah dalam menambahkan konfigurasi pada loader yang digunakan melalui properti options. Berikut contohnya.
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              // masukkan style dengan <style> di bawah dari element <body>
+              insert: 'body',
+            },
+          },
+          {
+            loader: 'css-loader',
+          },
+        ],
+      },
+    ],
+  },
+};
+
+4. Plugin
+Plugin pada webpack digunakan untuk melakukan tugas, seperti optimasi bundel, manajemen aset, dan sebagainya. Dengan adanya plugin ini, webpack menjadi lebih fleksibel. Plugin merupakan tulang punggung dari webpack. Bahkan webpack sendiri dibangun menggunakan sistem plugin sama seperti yang kita lakukan pada webpack configuration.
+
+Plugin pada webpack adalah sebuah JavaScript object yang dibangun menggunakan JavaScript class dan di dalamnya terdapat method apply dengan satu argument bernama compiler. Kita dapat membuat webpack plugin sederhana dengan cara berikut.
+
+const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
+ 
+class ConsoleLogOnBuildWebpackPlugin {
+  constructor(options) {
+    this.options = options;
+  }
+ 
+  apply(compiler) {
+    compiler.hooks.run.tap(pluginName, (compilation) => {
+      console.log(this.options.message);
+    });
+  }
+}
+ 
+module.exports = ConsoleLogOnBuildWebpackPlugin;
+
+Ketika kita menggunakan plugin tersebut dalam webpack configuration, ia akan mencetak nilai this.options.message pada console ketika proses build dalam webpack berjalan. 
+
+Untuk saat ini, jangan terfokus pada cara membuat plugin di webpack. Alih-alih, fokuslah pada cara ia digunakan dalam webpack configuration. Karena plugin merupakan objek dan kita mungkin menyimpan konfigurasi ketika ia dibuat, dalam membuat objek plugin kita perlu menggunakan keyword new seperti berikut.
+
+const ConsoleLogOnBuildWebpackPlugin = require('./ConsoleLogOnBuildWebpackPlugin.js');
+module.exports = {
+  plugins: [
+    new ConsoleLogOnBuildWebpackPlugin({
+      message: 'The webpack build process is starting!',
+    }),
+  ],
+};
+
+Banyak plugin, baik standar webpack maupun pihak ketiga yang dapat kita manfaatkan pada webpack. Karena itulah, kita tidak perlu fokus pada cara membuat plugin. Untuk menggunakan plugin standar webpack, kita dapat mengaksesnya melalui objek webpack seperti berikut
+// Dibutuhkan untuk mengakses built-in plugins
+const webpack = require('webpack');
+ 
+module.exports = {
+  plugins: [new webpack.ProgressPlugin()],
+};
+
+plugin standar di luar npm install html-webpack-plugin --save-dev
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+ 
+module.exports = {
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: 'index.html',
+    }),
+  ],
+};
+
+5. Mode
+Mode adalah salah satu properti yang terdapat pada webpack configuration. Dengan memberikan mode dengan nilai “development”, “production”, atau “none”, kita dapat melakukan optimasi pada webpack berdasarkan mode yang dikehendaki. Jika tidak menetapkan nilai pada properti mode, webpack akan memberi nilai “production” kepada kita.
+
+module.exports = {
+  mode: 'production',
+};
+
+Nilai mode juga dapat kita tetapkan melalui CLI argument seperti berikut.
+npx webpack --mode development
+
+Kita dapat melakukan optimasi pada webpack berdasarkan mode yang dikehendaki karena tiap properti pada webpack configuration menyesuaikan dengan modenya. Misalkan, jika kita menggunakan mode “development”, kita dapat menggunakan properti devtool, cache, atau properti lainnya pada webpack configuration.
+
+module.export = {
+  mode: 'development',
+  devtool: 'eval',
+  cache: 'true',
+};
+
+
+Properti devtool atau cache tentu tidak dapat digunakan dalam mode “production”, tetapi kita bisa memanfaatkan properti-properti pada “production”. Begitu juga ketika kita menetapkan mode “none”. Untuk menggali lebih jauh tentang properti yang dapat kita manfaatkan pada masing-masing modenya, silakan cek halaman:
+
+Jika kita ingin mengubah perilaku webpack berdasarkan nilai mode dalam webpack.config.js, ubahlah module.exports dari objek ke fungsi.
+
+const config = {
+  entry: './app.js',
+  /* ...kode lainnya disembunyikan... */
+};
+ 
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map';
+  }
+ 
+  if (argv.mode === 'production') {
+    /* ...kode lainnya disembunyikan... */
+  }
+ 
+  return config;
+};
+
+Cara lainnya, kita dapat menggunakan flag --config pada scripts berkas package.json untuk menetapkan berkas webpack configuration yang berbeda pada tiap modenya.
+
+{
+  "//": "...",
+  "scripts": {
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js"
+  },
+  "//": "..."
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

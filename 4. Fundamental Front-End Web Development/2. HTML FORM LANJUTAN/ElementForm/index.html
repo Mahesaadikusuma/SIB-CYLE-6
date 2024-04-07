@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Form Lanjutan</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form>
+      <div class="form-group">
+        <label for="name">Nama</label>
+        <input type="text" name="name" id="name" />
+      </div>
+      <div class="form-group">
+        <label for="telephone">Telepon</label>
+        <input type="tel" name="telephone" id="telephone" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+      </div>
+
+      <fieldset>
+        <legend>Waktu Keberangkatan</legend>
+        <div class="form-group">
+          <label for="departure_date">Tanggal</label>
+
+          <input type="datetime-local" //datetime-local local itu penggunaan
+          date dan time name="departure_date" id="departure_date" />
+        </div>
+        <div class="form-group">
+          <label for="departure_date">Jam</label>
+          <input type="time" name="departure_date" id="departure_date" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Waktu Kedatangan</legend>
+        <div class="form-group">
+          <label for="arrival_date">Tanggal</label>
+          <input type="date" name="arrival_date" id="arrival_date" />
+        </div>
+        <div class="form-group">
+          <label for="arrival_date">Jam</label>
+          <input type="time" name="arrival_date" id="arrival_date" />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Jenis Kelamin</legend>
+        <div class="form-group">
+          <input type="radio" name="gender" value="man" id="gender_man" />
+          <label for="gender_man">Laki-laki</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" name="gender" value="woman" id="gender_woman" />
+          <label for="gender_woman">Perempuan</label>
+        </div>
+      </fieldset>
+
+      <div class="form-group">
+        <label for="hobbies">Hobi</label>
+        <select name="hobbies" id="hobbies" required>
+          <option value="" disabled selected>Pilih salah satu</option>
+          <option value="sport">Olahraga</option>
+          <option value="reading_book">Membaca buku</option>
+          <option value="traveling">Bepergian</option>
+          <option value="culinary">Kulineran</option>
+          <option value="gardening">Berkebun</option>
+          <option value="bicycling">Bersepeda</option>
+          <option value="photography">Fotografi</option>
+          <option value="cooking">Memasak</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="expedition">Jasa Pengiriman/Kurir</label>
+        <input
+          type="text"
+          id="expedition"
+          name="expedition"
+          required
+          list="expeditionList" />
+        <datalist id="expeditionList">
+          <option value="POS Indonesia">POS Indonesia</option>
+          <option value="JNE">JNE</option>
+          <option value="TIKI">TIKI</option>
+        </datalist>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="type email" />
+      </div>
+
+      <div class="form-group">
+        <label for="personal_website">Personal Website</label>
+        <input
+          type="url"
+          name="personal_website"
+          id="personal_website"
+          placeholder="type url" />
+      </div>
+
+      <div class="form-group">
+        <button class="btn">Daftar</button>
+      </div>
+    </form>
+  </body>
+</html>

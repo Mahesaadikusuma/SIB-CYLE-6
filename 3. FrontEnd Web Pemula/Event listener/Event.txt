@@ -1,0 +1,61 @@
+MACAM MACAM EVENT JS
+1. onclick
+2. onchange
+3. onsubmit
+4. onload
+
+Window Events yang dari dicoding (v)
+1. onload = Event ini akan terjadi setelah halaman web selesai diunduh dan ditampilkan. v
+2. onresize = Event ini akan terjadi jika window browser di-resize oleh user atau oleh hal lainnya. v
+3. onfocus
+4. onblur
+5. onscroll
+6. onpageshow = Event ini akan terjadi jika halaman web kembali dikunjungi kembali (berbeda dengan onload, karena event onload tidak akan terjadi jika halaman web diambil dari cache). v
+
+Form Events (V)
+1. onsubmit = Event ini akan terjadi ketika user menekan tombol ‘submit’’ pada form.
+2. onreset = Event ini akan terjadi ketika user menekan tombol ‘reset’’ pada elemen form.
+3. oninput
+4. oninvalid
+5. onselect
+
+9. onmouseover
+10. onmouseout
+11. onmousemove
+12. onmousedown
+13. onmouseup
+14. ondrag
+
+Keyboard Event
+1. onkeydown = Event ini akan terjadi ketika sebuah tombol pada keyboard ditekan.
+2. onkeypress = 	Event ini terjadi setelah onkeydown, di mana tombol masih dalam keadaan ditekan. Event ini tidak dapat mendeteksi tombol fungsi seperti CTRL, SHIFT, ALT, ESC, BACKSPACE, dan sebagainya.
+3. onkeyup = Event ini akan terjadi ketika sebuah tombol pada keyboard dilepas.
+
+Clipboard Events
+1. oncopy = Event ini akan terjadi ketika kita melakukan proses copy.
+oncut = Event ini akan terjadi ketika kita melakukan proses cut.
+onpaste = Event ini akan terjadi ketika kita melakukan proses paste.
+
+Mouse Events
+1. onclick = Event ini akan terjadi ketika kita menekan elemen tertentu dengan cursor.
+2. ondblclick = Event ini akan terjadi ketika kita menekan elemen tertentu dua kali berturut-turut dengan cursor.
+3. onmouseover = Event ini akan terjadi ketika cursor kita berada di atas sebuah elemen tertentu.
+
+
+
+
+
+
+Penggunaan event listener
+ element.onclick = fungsiA;
+  element.onclick = fungsiB;
+Selain itu, terdapat permasalahan lagi jika tidak menggunakan addEventListener. Kode di atas, kita memanggil function onclick dan melakukan assignment dengan fungsiA dan fungsiB. Sayangnya, fungsiA ini akan ter-overwrite alias tertimpa fungsiB. Oleh karena itu, jika elemen di-klik, hanya fungsiB saja yang dijalankan. Bagaimana cara kita menemukan solusi agar fungsiA dan fungsiB dijalankan ketika elemen di-klik? Gunakanlah method addEventListener()!
+
+element.addEventListener('click', fungsiA);
+  element.addEventListener('click', fungsiB);
+Selain mampu menambahkan multiple event listener dalam satu event, kita juga akan mempelajari penerapan method addEventListener() lebih tepat untuk skenario-skenario tertentu ketimbang menggunakan event handler yang dicontohkan sebelumnya. Method addEventListener() juga mendukung fitur “event bubbling dan capturing” yang akan kita bahas nantinya.
+
+
+DOMContentLoaded: Event DOMContentLoaded terjadi ketika seluruh dokumen HTML telah diurai (parsed) oleh browser dan konstruksi DOM (Document Object Model) telah selesai, meskipun gambar, style sheet, dan sub-frame mungkin masih dalam proses pengunduhan. Ini berarti event ini terjadi lebih awal dibandingkan dengan event load. Penggunaan yang umum dari event DOMContentLoaded adalah untuk memulai eksekusi kode JavaScript setelah dokumen HTML selesai dimuat, tanpa menunggu gambar dan sumber daya lainnya.
+
+onload: Event load terjadi ketika seluruh halaman web, termasuk semua gambar, style sheet, dan sub-frame telah selesai dimuat. Jadi, event load terjadi lebih lambat daripada event DOMContentLoaded. Biasanya, event load digunakan ketika Anda ingin menunggu semua sumber daya di halaman dimuat sebelum menjalankan kode tertentu atau melakukan tindakan tertentu.

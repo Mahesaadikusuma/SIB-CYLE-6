@@ -1,0 +1,19 @@
+npm install jquery
+npm install http-server --save-dev
+npm install moment
+
+
+uinstall package 
+npm uninstall <package-name>
+uninstall <package-name> --save-dev
+
+
+Contoh, jika ingin menghapus package http-server, kita tuliskan dan jalankan perintah berikut.
+npm uninstall http-server --save-dev
+
+npm uninstall --help
+
+Mari kita coba memasang kembali package http-server. Namun, kali ini pada cakupan global. Untuk melakukannya, kita tuliskan perintah berikut.
+npm install http-server --global
+
+npm list --global
